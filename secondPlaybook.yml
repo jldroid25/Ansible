@@ -1,0 +1,12 @@
+---
+# Create a play to check the latest Ansible's module install 
+- name: "Challenge Me "
+  hosts: host1
+
+  tasks:
+    - name: 
+      pip:
+        name: ansible
+        virtualenv: ~/Desktop/Challenge1 
+
+    

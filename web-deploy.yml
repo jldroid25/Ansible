@@ -1,0 +1,31 @@
+---
+### ----Performing Orchestration with Ansible-----
+
+# A Playbook to stimulate Load balancers disabling a node that needs upgrade
+# while enabling/allowing the other 2 nodes remain in traffic.
+
+#Create a Play calll Deploy
+- name: Deploy
+  hosts: web
+  #Perform all the tasks before moving to next ones
+  serial: 1
+
+  #Disable web node on the load Balancer, use "debug" module to simulate this action
+  tasks:
+    - name: disable node
+      debug:
+        msg: "disable {{ inventory_hostname }}"
+        #Redirect connection, Keep context of original target
+        # so target the first item in the LB groups
+      delegate_to: "{{ groups['lb'][0] }}"
+
+      # Now Lets upgrade the software
+    - name: upgrade web
+      debug:
+        msg: "Upgrade software"
+
+    # Let's Re-enable the nodes
+    - name: enable node
+      debug:
+        msg: "enable {{  inventory_hostname }}"
+      delegate_to: "{{ groups['lb'][0] }} "

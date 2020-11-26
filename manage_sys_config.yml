@@ -1,0 +1,33 @@
+---
+    # Using Ansible to to perform or install configuration Management for "Nginx"
+
+- name: configure web app
+  #target the web host where the website runs
+  hosts: web
+  # A variable to  store our repository & git version
+  vars:
+    repo:  myrepo.com/repo.git
+    version: 8
+
+  tasks:
+    - name: install nginx
+      debug:
+        msg: "dnf install nginx"
+
+    # A directory to hold the web content
+    # note: Ansible will not recreate dir if already exists
+    - name: ensure web directory
+      debug:
+        msg: "mkdir /webapp/"
+    
+    - name: get content 
+      debug:
+        msg: "git clone --branch {{ version }} {{ repo }} / webapp"
+
+    - name: nginx config
+      debug:
+        msg: "put nginx config in place "
+
+    - name: ensure ngnix is running
+      debug: 
+        msg: "service  nginx start"

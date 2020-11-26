@@ -1,0 +1,38 @@
+---
+   # Using ansible to create new infrastructure 
+   # and manage those newly created hosts.
+
+   # so here we are creating 2 plays : Once to create docker container and
+   # the other to do something with those containers.
+
+   # first Play 
+
+- name: make dockers
+  hosts: localhost
+
+  tasks:
+    - name: make dockers
+      docker_container: 
+        image: busybox
+         # a command to sleep for a 1 day 
+        command: sleep 1d
+        name: "busy{{ item }}"
+        # using loop with_sequence iterate over a set of things i e to count to 3
+      with_sequence: count=3
+
+    - name: add hosts
+      add_host:
+        name: "busy{{  item  }}"
+        groups: dockers
+        ansible_connection: docker
+      with_sequence: count=3
+ 
+   # Second Play
+- name: hi from docker
+  hosts: dockers
+  # Since we don't have python install - set gather facts to false.
+  gather_facts: False
+
+  tasks:
+    - name: ping
+      raw: echo $HOSTNAME
