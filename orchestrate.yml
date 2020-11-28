@@ -1,0 +1,28 @@
+---
+    # An Orchestration  example hon how to use Ansible to Orchestrate or manage
+    #several tasks automatically. Here we had created a fake server inventory file
+    # called myhosts (great idea if you don't have servers to play with)
+    # then in our playbook file here we are orchestrating our multiple server's tasks
+
+- name: "Orchestration Example"
+  hosts: logicservers
+
+  #serial: 1 # run & finish with one task at a time before moving on
+  strategy: free # Tell ansible to go ahead & run playbook all at once as quickly as possible
+
+  tasks:
+    - name: "Shutdown Server"
+      debug: 
+        msg: "Shutdown {{ inventory_hostname }}"
+
+    - name: "Upgrade Firmware"
+      debug: 
+        msg: " Upgrade {{ inventory_hostname }}"
+
+    - name: "Start Server"
+      debug: 
+        msg: " Start {{ inventory_hostname }}"
+
+    - name: "Verify Server"
+      debug: 
+        msg: " Verify {{ inventory_hostname }}"

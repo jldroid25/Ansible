@@ -3,7 +3,8 @@
 
 - name: configure web app
   #target the web host where the website runs
-  hosts: web
+  #hosts: web
+  hosts: localhost
   # A variable to  store our repository & git version
   vars:
     repo:  myrepo.com/repo.git

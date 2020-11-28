@@ -1,5 +1,5 @@
 ---
-    # Using Ansible to to perform or install configuration Management for "Nginx"
+    # Using Ansible to to perform or install configuration Management for i, e "Nginx"
 
 - name: configure web app
   #target the web host where the website runs

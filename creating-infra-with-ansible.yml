@@ -5,6 +5,11 @@
    # so here we are creating 2 plays : Once to create docker container and
    # the other to do something with those containers.
 
+   # With Ansible we can dinamically  build Infrastructure from the ground up.
+   # Manage/ provision  physical Infrastructure 
+   # We can automate Virtualization on top of those physical components
+   # Ansible has  a wide O.S support 
+
    # first Play 
 
 - name: make dockers

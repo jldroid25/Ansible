@@ -1,0 +1,14 @@
+---
+    # Write a playbook to check localhost's reachability & to also read content
+    # of two text files
+    - name: "Challenge answers"
+      hosts: localhost # executhe the play agains localhost
+    
+      tasks:
+        - name: "Test Reachability"
+          ping:
+            
+        - name: "find module" #Using find module to locate 2 files & read their contents
+          find:
+            path: ./Challenges
+            file_type: file

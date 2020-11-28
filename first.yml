@@ -1,0 +1,13 @@
+---
+
+- name: "My first Play"
+  hosts: localhost # executhe the play agains localhost
+
+  tasks:
+    - name: "Test Reachability"
+      ping:
+        
+    - name: "Install Stress" #Using homebrew to install stress module if it's not there
+      homebrew:
+        name: Stress
+        state: present
